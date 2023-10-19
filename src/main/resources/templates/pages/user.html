@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Users</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>family name</th>
+                                <th>first name</th>
+                                <th>birthday</th>
+                                <th>tel</th>
+                                <th>mail</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user, iter : ${users}">
+                                <td><span th:text="${iter.count}"></span></td>
+                                <td><span th:text="${user.familyName}"></span></td>
+                                <td><span th:text="${user.firstName}"></span></td>
+                                <td><span th:text="${user.birthday}"></span></td>
+                                <td><span th:text="${user.tel}"></span></td>
+                                <td><span th:text="${user.mail}"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
