@@ -6,7 +6,7 @@
 </head>
 <body>
 <section layout:fragment="content">
-
+    <div class="row"><div id="updated" th:text="${param.updated}"></div></div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
@@ -49,14 +49,13 @@
             </div>
         </div>
     </div>
-
+    <script th:inline="javascript">
+        var updated = [[${param.updated}]];
+        if(updated){
+            alert('수정 완료')
+        }
+    </script>
 </section>
-<script th:if="${param.updated == 'true'}">
-    alert('수정 완료');
-</script>
-<script th:if="${param.deleted == 'true'}">
-    alert('삭제 완료');
-</script>
 </body>
 </html>
 
