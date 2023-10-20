@@ -10,5 +10,7 @@ public interface BoardMapper {
 
     int boardCount();
 
+    BoardDTO getBoard(Integer id);
+
     List<BoardDTO> getList();
 }

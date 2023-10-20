@@ -28,10 +28,16 @@ public class BoardController {
     public ModelMap test(Model model){
         ModelMap modelMap = new ModelMap();
         model.addAttribute("cnt", this.boardService.boardCount());
-        model.addAttribute("test", this.boardService.boardList());
+        model.addAttribute("list", this.boardService.boardList());
         return modelMap;
     }
 
+    @GetMapping(value = "boardview")
+    public ModelMap boardview(Integer id){
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("boardview", this.boardService.getBoard(id));
+        return modelMap;
+    }
 //    @GetMapping(value = "user")
 //    public ModelMap mmDashboard() {
 //        // todo get apple stock price

@@ -11,19 +11,20 @@
             <div class="card">
                 <div class="card-body">
                     <div class="container" style="max-width: 1000px">
-                        <h1>[[${cnt}]]</h1>
-                        <h1>[[${test[0].title}]]</h1>
-                        <hr class="my-4">
-                        <div>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th th:text="#{label.board.id}">ID</th>
-                                    <th th:text="#{label.board.title}">제목</th>
-                                    <th th:text="#{label.board.name}">작성자</th>
-                                    <th th:text="#{label.board.created_at}">등록일</th>
-                            </table>
-                        </div>
+                        <table class="table">
+                            <thead>
+                            <th>글 번호</th>
+                            <th>작성자</th>
+                            <th>제목</th>
+                            <th>조회수</th>
+                            </thead>
+                            <tr th:each="list :${list}">
+                                <td>[[${list.id}]]</td>
+                                <td>[[${list.name}]]</td>
+                                <td>[[${list.title}]]</td>
+                                <td>[[${list.read}]]</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -14,4 +14,11 @@
         *
         FROM board;
     </select>
+
+    <select id="getBoard" parameterType="Integer" resultType="com.farhan.staradmin.domain.BoardDTO">
+        SELECT
+        *
+        FROM board WHERE id=#{id};
+    </select>
+
 </mapper>

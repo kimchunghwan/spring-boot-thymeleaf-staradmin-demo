@@ -22,9 +22,4 @@ public class UserSample {
     Boolean isQuit;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
-<<<<<<< HEAD
-
 }
-=======
-}
->>>>>>> origin/bwy/user
