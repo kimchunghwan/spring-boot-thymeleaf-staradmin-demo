@@ -51,15 +51,11 @@
     </div>
 
 </section>
-<script th:if="${showUpdatePopup}">
-    <script type="text/javascript">
-        alert('수정 완료');
-    </script>
+<script th:if="${param.updated == 'true'}">
+    alert('수정 완료');
 </script>
-<script th:if="${showDeletePopup}">
-    <script type="text/javascript">
-        alert('삭제 완료');
-    </script>
+<script th:if="${param.deleted == 'true'}">
+    alert('삭제 완료');
 </script>
 </body>
 </html>
