@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container" style="max-width: 1000px">
+                        <tr th:each="boardview, iter : ${boardview}">
+                            <td>글 번호: <span th:text="${boardview.id}"></span></td>
+                            <td>제목 : <p th:text="${boardview.title}"></p></td>
+                            <td>작성자 : <p th:text="${boardview.content}"></p></td>
+                            내용:<textarea class="form-control" th:text="${boardview.content}"></textarea>
+                            <td>조회 수 : <span th:text="${boardview.read}"></span></td>
+                        </tr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
