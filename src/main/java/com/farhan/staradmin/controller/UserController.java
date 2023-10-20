@@ -27,4 +27,8 @@ public class UserController {
         modelMap.addAttribute("users", users);
         return modelMap;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/bwy/user

@@ -1,0 +1,1 @@
+INSERT INTO board( title, content, name) VALUES ('타이틀', '내용', '이름')
