@@ -51,7 +51,7 @@
     </div>
     <script th:inline="javascript">
         var updated = [[${param.updated}]];
-        if(updated){
+        if(updated == 'true'){
             alert('수정 완료')
         }
     </script>
