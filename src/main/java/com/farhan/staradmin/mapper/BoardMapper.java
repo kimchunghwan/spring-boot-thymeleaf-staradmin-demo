@@ -10,7 +10,13 @@ public interface BoardMapper {
 
     int boardCount();
 
-    BoardDTO getBoard(Integer id);
+    BoardDTO getBoard(int id);
 
     List<BoardDTO> getList();
+
+    void uploadBoard(BoardDTO board);
+
+    void updateBoard(BoardDTO board);
+
+    void deleteBoard(Long id);
 }

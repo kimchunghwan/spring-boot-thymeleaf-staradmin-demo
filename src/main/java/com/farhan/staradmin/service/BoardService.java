@@ -22,7 +22,21 @@ public class BoardService {
     public List<BoardDTO> boardList(){return boardMapper.getList();}
 
     // 게시판 상세 내용 조회
-    public BoardDTO getBoard(Integer id){return boardMapper.getBoard(id);}
+    public BoardDTO getBoard(int id){return boardMapper.getBoard(id);}
+
+    // 내용 생성
+
+    @Transactional
+    public void uploadBoard(BoardDTO board) {
+        boardMapper.uploadBoard(board);
+    }
+
+    @Transactional
+    public void updateBoard(BoardDTO board) { boardMapper.updateBoard(board); }
+
+    @Transactional
+    public void deleteBoard(Long id) { boardMapper.deleteBoard(id); }
+
 
 //    public ArrayList<BoardDTO> findBoard() {
 //        return this.boardMapper.find();

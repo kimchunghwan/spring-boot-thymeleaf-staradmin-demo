@@ -21,4 +21,22 @@
         FROM board WHERE id=#{id};
     </select>
 
+    <insert id="uploadBoard" parameterType="com.farhan.staradmin.domain.BoardDTO">
+        INSERT INTO board (title, content, name)
+        VALUES
+        (#{title}, #{content}, #{name});
+    </insert>
+
+    <update id="updateBoard" parameterType="com.farhan.staradmin.domain.BoardDTO">
+        UPDATE board
+        SET title =#{title} , content=#{content}
+        WHERE id =#{id};
+    </update>
+
+    <delete id="deleteBoard" parameterType="Long">
+        DELETE
+        FROM board
+        WHERE id =#{id};
+    </delete>
+
 </mapper>

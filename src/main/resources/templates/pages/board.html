@@ -2,6 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 <head>
+    <meta charset="UTF-8">
     <title>Hello world</title>
 </head>
 <body>
@@ -14,15 +15,19 @@
                         <table class="table">
                             <thead>
                             <th>글 번호</th>
-                            <th>작성자</th>
                             <th>제목</th>
+                            <th>작성자</th>
                             <th>조회수</th>
                             </thead>
                             <tr th:each="list :${list}">
-                                <td>[[${list.id}]]</td>
-                                <td>[[${list.name}]]</td>
-                                <td>[[${list.title}]]</td>
-                                <td>[[${list.read}]]</td>
+                                <td><p th:text="${list.id}"></p></td>
+                                <td>
+                                    <a th:href="@{boardview(id=${list.id})}">
+                                        <p th:text="${list.title}"></p>
+                                    </a>
+                                </td>
+                                <td><p th:text="${list.name}"></p></td>
+                                <td><p th:text="${list.read}"></p></td>
                             </tr>
                         </table>
                     </div>
