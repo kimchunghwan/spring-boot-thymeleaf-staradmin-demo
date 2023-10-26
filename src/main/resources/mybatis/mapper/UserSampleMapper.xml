@@ -1,0 +1,63 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farhan.staradmin.mapper.UserSampleMapper">
+    <select id="selectAllUsers" resultType="com.farhan.staradmin.model.UserSample">
+        select *
+        from user_sample
+    </select>
+    <select id="selectOneUserById" parameterType="long" resultType="com.farhan.staradmin.model.UserSample">
+        SELECT * FROM user_sample WHERE id = #{id}
+    </select>
+    <!--
+    <resultMap id="UserSampleResultMap" type="com.farhan.staradmin.model.UserSample">
+        <result property="id" column="id"/>
+        <result property="familyName" column="family_name"/>
+        <result property="firstName" column="first_name"/>
+        <result property="familyKanaName" column="family_kana_name"/>
+        <result property="firstKanaName" column="first_kana_name"/>
+        <result property="birthday" column="birthday" jdbcType="DATE"/>
+        <result property="gender" column="gender"/>
+        <result property="office" column="office"/>
+        <result property="tel" column="tel"/>
+        <result property="mail" column="mail"/>
+        <result property="isQuit" column="is_quit"/>
+        <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+        <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    -->
+
+    <!--
+
+
+    <update id="updateUser" parameterType="com.farhan.staradmin.model.UserSample">
+        UPDATE user_sample SET
+                               family_name = #{familyName},
+                               first_name = #{firstName},
+                               family_kana_name = #{familyKanaName},
+                               first_kana_name = #{firstKanaName},
+                               birthday = #{birthday},
+                               gender = #{gender},
+                               office = #{office},
+                               tel = #{tel},
+                               mail = #{mail},
+                               is_quit = #{isQuit},
+                               updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <update id="quitUserById" parameterType="long">
+        UPDATE user_sample SET
+            is_quit = 1
+        WHERE id = #{id}
+    </update>
+
+    -->
+<!--    <insert id="createUser" parameterType="com.farhan.staradmin.model.UserSample" useGeneratedKeys="true" keyProperty="id">-->
+<!--        INSERT INTO user_sample (-->
+<!--            family_name, first_name, family_kana_name, first_kana_name, birthday,-->
+<!--            gender, office, tel, mail, is_quit, created_at, updated_at-->
+<!--        ) VALUES (-->
+<!--                     #{familyName}, #{firstName}, #{familyKanaName}, #{firstKanaName}, #{birthday},-->
+<!--                     #{gender}, #{office}, #{tel}, #{mail}, false, #{createdAt}, #{updatedAt}-->
+<!--                 )-->
+<!--    </insert>-->
+</mapper>
