@@ -6,6 +6,7 @@ import lombok.ToString;
 import lombok.Setter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @NoArgsConstructor
 @Getter
@@ -17,6 +18,7 @@ public class UserSample {
     private String firstName;
     private String familyKanaName;
     private String firstKanaName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String gender;
     private String office;

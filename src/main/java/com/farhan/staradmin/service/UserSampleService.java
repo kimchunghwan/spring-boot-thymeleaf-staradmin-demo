@@ -20,13 +20,15 @@ public class UserSampleService {
         return this.userSampleMapper.selectOneUserById(id);
     }
 
-    // insertUser
-
     public void updateUser(UserSample userSample) {
         userSampleMapper.updateUser(userSample);
     }
 
-    public void deleteUserById(Long id) {
-        userSampleMapper.deleteUserById(id);
+    public void quitUserById(Long id) {
+        userSampleMapper.quitUserById(id);
+    }
+
+    public void createUser(UserSample userSample) {
+        userSampleMapper.createUser(userSample);
     }
 }

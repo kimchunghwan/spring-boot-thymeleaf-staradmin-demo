@@ -6,16 +6,15 @@
 </head>
 <body>
 <section layout:fragment="content">
-
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">User Sample Detail</h4>
-                <form class="form-sample" th:action="@{/pages/updateUser}" method="post">
+                <form id="userForm" class="form-sample" method="post">
                     <p class="card-description">Personal info</p>
 
-                    <!-- ID -->
                     <div class="row">
+                        <!-- ID -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">ID</label>
@@ -26,8 +25,8 @@
                         </div>
                     </div>
 
-                    <!-- Family Name -->
                     <div class="row">
+                        <!-- Family Name -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Family Name</label>
@@ -48,8 +47,8 @@
                         </div>
                     </div>
 
-                    <!-- Family Kana Name -->
                     <div class="row">
+                        <!-- Family Kana Name -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Family Kana Name</label>
@@ -70,20 +69,20 @@
                         </div>
                     </div>
 
-                    <!-- Birthday -->
                     <div class="row">
+                        <!-- Birthday -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Birthday</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="yyyy/mm/dd" th:value="${#dates.format(user.birthday, 'yyyy/MM/dd')}" name="birthday" />
+                                    <input type="date" class="form-control" th:value="${#dates.format(user.birthday, 'yyyy-MM-dd')}" name="birthday" />
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Gender -->
                     <div class="row">
+                        <!-- Gender -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Gender</label>
@@ -97,8 +96,8 @@
                         </div>
                     </div>
 
-                    <!-- Office -->
                     <div class="row">
+                        <!-- Office -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Office</label>
@@ -109,8 +108,8 @@
                         </div>
                     </div>
 
-                    <!-- Tel -->
                     <div class="row">
+                        <!-- Tel -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tel</label>
@@ -121,8 +120,8 @@
                         </div>
                     </div>
 
-                    <!-- Email -->
                     <div class="row">
+                        <!-- Email -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Mail</label>
@@ -142,8 +141,8 @@
                         </div>
                     </div>
 
-                    <!-- Is Quit -->
                     <div class="row">
+                        <!-- Is Quit -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Is Quit</label>
@@ -165,8 +164,8 @@
                         </div>
                     </div>
 
-                    <!-- Created At & Updated At -->
                     <div class="row">
+                        <!-- Created At & Updated At -->
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Created At</label>
@@ -185,22 +184,30 @@
                         </div>
                     </div>
 
-
-                    <!-- Buttons for Update and Delete -->
                     <div class="row mt-4">
+                        <!-- Buttons for Update and Quit -->
                         <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary mr-2">Update</button>
-                            <form th:action="@{'/pages/deleteUser/' + ${user.id}}" method="post">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                            <button type="button" id="updateButton" class="btn btn-primary mr-2">Update</button>
+                            <button type="button" id="quitButton" class="btn btn-danger">Quit</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        document.getElementById('updateButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('userForm').action = /*[[@{/pages/user-sample-detail/updateUser}]]*/ '';
+            document.getElementById('userForm').submit();
+        });
 
+        document.getElementById('quitButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('userForm').action = /*[[@{'/pages/user-sample-detail/quitUser/' + ${user.id}}]]*/ '';
+            document.getElementById('userForm').submit();
+        });
+    </script>
 </section>
 </body>
 </html>
-
