@@ -1,9 +1,14 @@
 package com.farhan.staradmin.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
+import com.farhan.staradmin.domain.BoardAPI;
 import com.farhan.staradmin.domain.BoardDTO;
+import com.farhan.staradmin.domain.Pagination;
+import com.farhan.staradmin.domain.PagingResponse;
 import com.farhan.staradmin.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,10 +21,22 @@ public class BoardService {
 
     private final BoardMapper boardMapper;
 
-    public int boardCount(){return boardMapper.boardCount();}
+    public int boardCount(BoardAPI api){return boardMapper.boardCount(api);}
 
     // 게시판 리스트 조회
-    public List<BoardDTO> boardList(){return boardMapper.getList();}
+    public PagingResponse<BoardDTO> boardList(BoardAPI api){
+
+        int count = boardMapper.boardCount(api);
+        if(count < 1){
+            return new PagingResponse<>(Collections.emptyList(), null);
+        }
+
+        Pagination pagination = new Pagination(count, api);
+        api.setPagination(pagination);
+
+        List<BoardDTO> list = boardMapper.getList(api);
+        return new PagingResponse<>(list, pagination);
+    }
 
     // 게시판 상세 내용 조회
     public BoardDTO getBoard(int id){return boardMapper.getBoard(id);}
@@ -37,8 +54,4 @@ public class BoardService {
     @Transactional
     public void deleteBoard(Long id) { boardMapper.deleteBoard(id); }
 
-
-//    public ArrayList<BoardDTO> findBoard() {
-//        return this.boardMapper.find();
-//    }
 }

@@ -1,7 +1,7 @@
 package com.farhan.staradmin.controller;
 
 import com.farhan.staradmin.domain.BoardDTO;
-import com.farhan.staradmin.model.UserSample;
+import com.farhan.staradmin.domain.BoardAPI;
 import com.farhan.staradmin.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -11,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.annotation.Resource;
-import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -25,10 +23,10 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping(value = "board")
-    public ModelMap boardlist(Model model){
+    public ModelMap boardlist(BoardAPI api, Model model){
         ModelMap modelMap = new ModelMap();
-        model.addAttribute("cnt", this.boardService.boardCount());
-        model.addAttribute("list", this.boardService.boardList());
+        model.addAttribute("cnt", this.boardService.boardCount(api));
+        model.addAttribute("list", this.boardService.boardList(api));
         return modelMap;
     }
 

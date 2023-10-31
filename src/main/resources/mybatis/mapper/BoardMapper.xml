@@ -5,14 +5,16 @@
 
 <mapper namespace="com.farhan.staradmin.mapper.BoardMapper">
 
-    <select id="boardCount" resultType="int">
+    <select id="boardCount" resultType="int" parameterType="com.farhan.staradmin.domain.BoardDTO">
         SELECT count(id) AS cnt FROM board;
     </select>
 
-    <select id="getList" resultType="com.farhan.staradmin.domain.BoardDTO">
+    <select id="getList" resultType="com.farhan.staradmin.domain.BoardDTO" parameterType="com.farhan.staradmin.domain.BoardAPI">
         SELECT
         *
-        FROM board;
+        FROM board
+        ORDER BY id desc
+        LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
 
     <select id="getBoard" parameterType="Integer" resultType="com.farhan.staradmin.domain.BoardDTO">
@@ -38,5 +40,23 @@
         FROM board
         WHERE id =#{id};
     </delete>
+
+<!--    마이바티스 검색 쿼리 -->
+
+<!--    <select id="selectAll" resultType="com.farhan.staradmin.domain.BoardDTO">-->
+<!--        select board as b-->
+<!--        b.title,-->
+<!--        b.name,-->
+
+<!--&#45;&#45;         동적 쿼리 관련-->
+<!--        WHERE 1 = 1-->
+<!--        <if test="type == 'T'.toString()">-->
+<!--            AND b.title LIKE '${keyword}%'-->
+<!--        </if>-->
+<!--        <if test="type == 'N'.toString()">-->
+<!--            AND b.name LIKE '${keyword}%'-->
+<!--        </if>-->
+<!--    </select>-->
+
 
 </mapper>
