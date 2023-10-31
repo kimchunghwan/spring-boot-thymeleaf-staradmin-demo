@@ -14,6 +14,7 @@ public class BoardDTO {
     private String title;
     private String content;
     private String name;
+    private int viewCnt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int read;

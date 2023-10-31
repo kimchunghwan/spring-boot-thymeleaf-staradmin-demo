@@ -2,6 +2,7 @@ package com.farhan.staradmin.controller;
 
 import com.farhan.staradmin.domain.BoardDTO;
 import com.farhan.staradmin.domain.BoardAPI;
+import com.farhan.staradmin.domain.PagingResponse;
 import com.farhan.staradmin.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,9 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping(value = "board")
-    public ModelMap boardlist(BoardAPI api, Model model){
+    public ModelMap boardlist(@ModelAttribute("api") BoardAPI api, Model model){
         ModelMap modelMap = new ModelMap();
-        model.addAttribute("cnt", this.boardService.boardCount(api));
+        PagingResponse<BoardDTO> response = boardService.boardList(api);
         model.addAttribute("list", this.boardService.boardList(api));
         return modelMap;
     }

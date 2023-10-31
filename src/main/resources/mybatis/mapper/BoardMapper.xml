@@ -5,14 +5,17 @@
 
 <mapper namespace="com.farhan.staradmin.mapper.BoardMapper">
 
-    <select id="boardCount" resultType="int" parameterType="com.farhan.staradmin.domain.BoardDTO">
-        SELECT count(id) AS cnt FROM board;
+    <select id="count" resultType="int" parameterType="com.farhan.staradmin.domain.BoardAPI">
+        SELECT COUNT(*)
+        FROM board
+        WHERE <include refid="search" />;
     </select>
 
     <select id="getList" resultType="com.farhan.staradmin.domain.BoardDTO" parameterType="com.farhan.staradmin.domain.BoardAPI">
         SELECT
         *
         FROM board
+        WHERE <include refid="search" />
         ORDER BY id desc
         LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
@@ -43,7 +46,7 @@
 
 <!--    마이바티스 검색 쿼리 -->
 
-<!--    <select id="selectAll" resultType="com.farhan.staradmin.domain.BoardDTO">-->
+<!--    <select id="search" resultType="com.farhan.staradmin.domain.BoardDTO">-->
 <!--        select board as b-->
 <!--        b.title,-->
 <!--        b.name,-->
@@ -58,5 +61,30 @@
 <!--        </if>-->
 <!--    </select>-->
 
+
+<!--    새로운 검색 로직-->
+    <sql id="search">
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="searchType != null and searchType != ''">
+                    <choose>
+                        <when test="'title'.equals( searchType )">
+                            AND title LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                        <when test="'name'.equals( searchType )">
+                            AND title LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </when>
+
+                <otherwise>
+                    AND (
+                        title LIKE CONCAT('%', #{keyword}, '%')
+                        OR name LIKE CONCAT('%', #{keyword}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
 
 </mapper>

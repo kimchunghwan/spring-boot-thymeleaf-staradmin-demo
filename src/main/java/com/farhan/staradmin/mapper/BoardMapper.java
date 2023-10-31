@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface BoardMapper {
 
-    int boardCount(BoardAPI api);
+    int count(BoardAPI api);
 
     BoardDTO getBoard(int id);
 
