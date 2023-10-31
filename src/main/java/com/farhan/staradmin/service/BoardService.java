@@ -21,12 +21,11 @@ public class BoardService {
 
     private final BoardMapper boardMapper;
 
-    public int boardCount(BoardAPI api){return boardMapper.boardCount(api);}
-
     // 게시판 리스트 조회
     public PagingResponse<BoardDTO> boardList(BoardAPI api){
 
-        int count = boardMapper.boardCount(api);
+        int count = boardMapper.count(api);
+
         if(count < 1){
             return new PagingResponse<>(Collections.emptyList(), null);
         }
