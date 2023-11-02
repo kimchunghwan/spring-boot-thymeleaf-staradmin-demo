@@ -103,7 +103,7 @@
 
                 const api = [[ ${api} ]];
 
-                let num = pagination.total - ((api.pageNum - 1) * api.recordSize);
+                let num = pagination.totalRecordCount - ((api.pageNum - 1) * api.recordSize);
 
                 drawList(list, num);
 
@@ -171,7 +171,8 @@
                     pageNum: (pageNum) ? pageNum : 1,
                     recordSize: 10,
                     pageSize: 10,
-                    searchType: form.searchType.value,
+                    // .value에 대해 찾아보기
+                    searchType: form.searchType,
                     keyword: form.keyword.value
                 }
 
