@@ -16,7 +16,7 @@ public class Pagination {
     // 페이징
     public Pagination(int totalRecordCount, BoardAPI api) {
         if (totalRecordCount > 0) {
-            this.totalRecordCount =  totalRecordCount;
+            this.totalRecordCount = totalRecordCount;
             calculation(api);
         }
     }

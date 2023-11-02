@@ -16,12 +16,13 @@
     <div class="row">
         <div class="col-lg-12 grid-margin">
             <div class="card">
-                <th:block>
+
                     <div class="card-body">
                         <div class="container" style="max-width: 1000px">
-                            <button th:onclick="|location.href='@{boardupload}'| ">글쓰기</button>
+                            <button th:onclick="|location.href='@{boardupload}'| " class="btns btn_st3 btn_mid">글쓰기</button>
                             <table class="table">
                                 <thead>
+                                <th>-</th>
                                 <th>글 번호</th>
                                 <th>제목</th>
                                 <th>작성자</th>
@@ -31,20 +32,20 @@
                                 <tbody id="list">
 
                                 </tbody>
-                                <!--                            <tr th:each="list :${list}">-->
-                                <!--                                <td><p th:text="${list.id}"></p></td>-->
-                                <!--                                <td>-->
-                                <!--                                    <a th:href="@{boardview(id=${list.id})}">-->
-                                <!--                                        <p th:text="${list.title}"></p>-->
-                                <!--                                    </a>-->
-                                <!--                                </td>-->
-                                <!--                                <td><p th:text="${list.name}"></p></td>-->
-                                <!--                                <td><p th:text="${list.read}"></p></td>-->
-                                <!--                                <td><p th:text="${#temporals.format(list.createdAt, 'yyyy.MM.dd HH:mm' )}"></p></td>-->
-                                <!--                            </tr>-->
+<!--                                                            <tr th:each="list :${list}">-->
+<!--                                                                <td><p th:text="${list.id}"></p></td>-->
+<!--                                                                <td>-->
+<!--                                                                    <a th:href="@{boardview(id=${list.id})}">-->
+<!--                                                                        <p th:text="${list.title}"></p>-->
+<!--                                                                    </a>-->
+<!--                                                                </td>-->
+<!--                                                                <td><p th:text="${list.name}"></p></td>-->
+<!--                                                                <td><p th:text="${list.read}"></p></td>-->
+<!--                                                                <td><p th:text="${#temporals.format(list.createdAt, 'yyyy.MM.dd HH:mm' )}"></p></td>-->
+<!--                                                            </tr>-->
                             </table>
                             <!--                        검색 기능-->
-                            <form id="searchForm" action="/board" method="get">
+                            <form id="searchForm" action="/pages/board" method="get">
                                 <select name="type">
                                     <option value="">--</option>
                                     <option value="T">제목</option>
@@ -56,21 +57,39 @@
 
                             <!--                        페이징-->
                             <div class="paging">
-
                             </div>
                         </div>
                     </div>
-                </th:block>
             </div>
         </div>
     </div>
-</section>
+
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         /*<![CDATA[*/
-            window.onload = () => {
-                boardList();
+
+        // 페이지가 로드되었을 때, 딱 한 번만 함수를 실행
+        window.onload = () => {
+            setQueryStringParams();
+            boardList();
+        }
+
+
+        // 쿼리 스트링 파라미터 셋팅
+        function setQueryStringParams() {
+
+            if ( !location.search ) {
+                return false;
             }
+
+            const form = document.getElementById('searchForm');
+
+            new URLSearchParams(location.search).forEach((value, key) => {
+                if (form[key]) {
+                    form[key].value = value;
+                }
+            })
+        }
 
             function boardList() {
                 const list = [[ ${response.list} ]];
@@ -99,9 +118,10 @@
                     html += `
                         <tr>
                             <td><input type="checkbox" /></td>
-                            <td class="tl"><a href="post/view.do?id=${row.id}">${row.title}</a></td>
+                            <td>${row.id}</td>
+                            <td class="tl"><a href="javascript:void(0);" onclick="goViewPage(${row.id});">${row.title}</a></td>
                             <td>${row.name}</td>
-                            <td>${dayjs(row.createdAt).format('YYYY-MM-DD HH:mm')}</td>
+                            <td>${row.viewCnt}</td>
                         </tr>
                     `;
                 })
@@ -109,9 +129,9 @@
                 document.getElementById('list').innerHTML = html;
             }
 
-            function drawPage(pagination, params) {
+            function drawPage(pagination, api) {
 
-                if (!pagination || !params) {
+                if (!pagination || !api) {
                     document.querySelector('.paging').innerHTML='';
                     throw new Error('요청하는 정보가 없습니다.');
                 }
@@ -151,13 +171,21 @@
                     pageNum: (pageNum) ? pageNum : 1,
                     recordSize: 10,
                     pageSize: 10,
-                    searchType: form.searchType.value,
+                    // .value에 대해 찾아보기
+                    searchType: form.searchType,
                     keyword: form.keyword.value
                 }
 
                 location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
             }
+
+            function goViewPage(id) {
+                const queryString = (location.search) ? location.search + `&id=${id}` : `?id=${id}`;
+                location.href = '/pages/boardview' + queryString;
+            }
+        /*]]>*/
     </script>
 </th:block>
+</section>
 </body>
 </html>

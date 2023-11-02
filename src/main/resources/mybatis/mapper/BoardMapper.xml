@@ -8,14 +8,14 @@
     <select id="count" resultType="int" parameterType="com.farhan.staradmin.domain.BoardAPI">
         SELECT COUNT(*)
         FROM board
-        WHERE <include refid="search" />;
+        <include refid="search" />;
     </select>
 
     <select id="getList" resultType="com.farhan.staradmin.domain.BoardDTO" parameterType="com.farhan.staradmin.domain.BoardAPI">
         SELECT
         *
         FROM board
-        WHERE <include refid="search" />
+        <include refid="search" />
         ORDER BY id desc
         LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
@@ -46,39 +46,22 @@
 
 <!--    마이바티스 검색 쿼리 -->
 
-<!--    <select id="search" resultType="com.farhan.staradmin.domain.BoardDTO">-->
-<!--        select board as b-->
-<!--        b.title,-->
-<!--        b.name,-->
-
-<!--&#45;&#45;         동적 쿼리 관련-->
-<!--        WHERE 1 = 1-->
-<!--        <if test="type == 'T'.toString()">-->
-<!--            AND b.title LIKE '${keyword}%'-->
-<!--        </if>-->
-<!--        <if test="type == 'N'.toString()">-->
-<!--            AND b.name LIKE '${keyword}%'-->
-<!--        </if>-->
-<!--    </select>-->
-
-
-<!--    새로운 검색 로직-->
     <sql id="search">
         <if test="keyword != null and keyword != ''">
             <choose>
                 <when test="searchType != null and searchType != ''">
                     <choose>
-                        <when test="'title'.equals( searchType )">
-                            AND title LIKE CONCAT('%', #{keyword}, '%')
+                        <when test="'T'.equals( searchType )">
+                            WHERE title LIKE CONCAT('%', #{keyword}, '%')
                         </when>
-                        <when test="'name'.equals( searchType )">
-                            AND title LIKE CONCAT('%', #{keyword}, '%')
+                        <when test="'N'.equals( searchType )">
+                            WHERE name LIKE CONCAT('%', #{keyword}, '%')
                         </when>
                     </choose>
                 </when>
 
                 <otherwise>
-                    AND (
+                    WHERE (
                         title LIKE CONCAT('%', #{keyword}, '%')
                         OR name LIKE CONCAT('%', #{keyword}, '%')
                     )
