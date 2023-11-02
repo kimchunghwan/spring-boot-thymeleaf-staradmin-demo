@@ -24,10 +24,10 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping(value = "board")
-    public ModelMap boardlist(@ModelAttribute("api") BoardAPI api, Model model){
+    public ModelMap boardlist(@ModelAttribute("api") final BoardAPI api, Model model){
         ModelMap modelMap = new ModelMap();
         PagingResponse<BoardDTO> response = boardService.boardList(api);
-        model.addAttribute("list", this.boardService.boardList(api));
+        model.addAttribute("response", response);
         return modelMap;
     }
 

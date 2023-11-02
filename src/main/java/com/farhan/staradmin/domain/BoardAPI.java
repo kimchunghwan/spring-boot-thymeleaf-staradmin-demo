@@ -13,7 +13,7 @@ public class BoardAPI {
     private int pageSize;
 
     // 검색
-    private String type;
+    private String searchType;
     private String keyword;
 
     private Pagination pagination;

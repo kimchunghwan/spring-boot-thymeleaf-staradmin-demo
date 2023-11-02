@@ -22,7 +22,7 @@ public class BoardService {
     private final BoardMapper boardMapper;
 
     // 게시판 리스트 조회
-    public PagingResponse<BoardDTO> boardList(BoardAPI api){
+    public PagingResponse<BoardDTO> boardList(final BoardAPI api){
 
         int count = boardMapper.count(api);
 

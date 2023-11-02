@@ -8,14 +8,14 @@
     <select id="count" resultType="int" parameterType="com.farhan.staradmin.domain.BoardAPI">
         SELECT COUNT(*)
         FROM board
-        WHERE <include refid="search" />;
+        <include refid="search" />;
     </select>
 
     <select id="getList" resultType="com.farhan.staradmin.domain.BoardDTO" parameterType="com.farhan.staradmin.domain.BoardAPI">
         SELECT
         *
         FROM board
-        WHERE <include refid="search" />
+        <include refid="search" />
         ORDER BY id desc
         LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
