@@ -12,8 +12,22 @@ public class UserSampleService {
     @Autowired
     private UserSampleMapper userSampleMapper;
 
-    public List<UserSample> selectAllUsers() {
-        return this.userSampleMapper.selectAllUsers();
+    public int countAllUsers() {
+        return this.userSampleMapper.countAllUsers();
+    }
+
+    public List<UserSample> selectAllUsers(int currentPage, int limit) {
+        int offset = (currentPage - 1) * limit;
+        return this.userSampleMapper.selectAllUsers(limit, offset);
+    }
+
+    public int countSearchedUsers(String keyword) {
+        return this.userSampleMapper.countSearchedUsers(keyword);
+    }
+
+    public List<UserSample> searchUsers(String keyword, int currentPage, int limit) {
+        int offset = (currentPage - 1) * limit;
+        return this.userSampleMapper.searchUsers(keyword, limit, offset);
     }
 
     public UserSample selectOneUserById(Long id) {
@@ -21,14 +35,14 @@ public class UserSampleService {
     }
 
     public void updateUser(UserSample userSample) {
-        userSampleMapper.updateUser(userSample);
+        this.userSampleMapper.updateUser(userSample);
     }
 
     public void quitUserById(Long id) {
-        userSampleMapper.quitUserById(id);
+        this.userSampleMapper.quitUserById(id);
     }
 
     public void createUser(UserSample userSample) {
-        userSampleMapper.createUser(userSample);
+        this.userSampleMapper.createUser(userSample);
     }
 }

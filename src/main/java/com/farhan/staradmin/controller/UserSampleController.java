@@ -16,19 +16,62 @@ import java.util.List;
 @Controller
 @RequestMapping("/pages")
 public class UserSampleController {
-
     private static final Logger logger = LoggerFactory.getLogger(UserSampleController.class);
 
     @Autowired
     private UserSampleService userSampleService;
 
     @GetMapping("/user-sample-list")
-    public String selectAllUsers(Model model) {
-        List<UserSample> users = userSampleService.selectAllUsers();
+    public String selectAllUsers(@RequestParam(value = "page", defaultValue = "1") int currentPage, Model model) {
+        int totalUsers = userSampleService.countAllUsers();
+        int limit = 5;
+        List<UserSample> users = userSampleService.selectAllUsers(currentPage, limit);
+        int totalPages = (int) Math.ceil((double) totalUsers / limit);
 
+        logger.info("Total users: {}", totalUsers);
         logger.info("Fetched users: {}", users);
 
+        model.addAttribute("totalUsers", totalUsers);
         model.addAttribute("users", users);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", currentPage);
+
+        return "pages/user-sample-list";
+    }
+
+    @GetMapping("/user-sample-list/searchUsers")
+    public String searchUsers(@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int currentPage, Model model) {
+        logger.info("searchUsers called with keyword: " + keyword);
+
+        int limit = 5;
+        List<UserSample> users;
+
+        // 검색 ㄴㄴ11
+        if(keyword == null || keyword.trim().isEmpty()) {
+            int totalUsers = userSampleService.countAllUsers();
+            users = userSampleService.selectAllUsers(currentPage, limit);
+            int totalPages = (int) Math.ceil((double) totalUsers / limit);
+
+            logger.info("Fetched all users: {}", users);
+
+            model.addAttribute("totalUsers", totalUsers);
+            model.addAttribute("totalPages", totalPages);
+        // 검색 ㅇㅇ
+        // } else if (keyword != null && !keyword.trim().isEmpty()) {
+        } else {
+            int totalSearchedUsers = userSampleService.countSearchedUsers(keyword);
+            users = userSampleService.searchUsers(keyword, currentPage, limit);
+            int totalPages = (int) Math.ceil((double) totalSearchedUsers / limit);
+
+            logger.info("Fetched users with keyword '{}': {}", keyword, users);
+
+            model.addAttribute("totalSearchedUsers", totalSearchedUsers);
+            model.addAttribute("totalPages", totalPages);
+        }
+
+        model.addAttribute("users", users);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("currentPage", currentPage);
 
         return "pages/user-sample-list";
     }

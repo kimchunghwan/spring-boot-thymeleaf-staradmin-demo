@@ -1,4 +1,4 @@
-create table user_sample
+CREATE TABLE user
 (
     id                bigint unsigned auto_increment comment 'ID' primary key,
     family_name       varchar(255)                               not null comment '姓',
