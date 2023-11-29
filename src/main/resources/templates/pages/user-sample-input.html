@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">User Sample Detail</h4>
+                <form id="userForm" class="form-sample" method="post">
+                    <p class="card-description">Personal info</p>
+
+                    <div class="row">
+                        <!-- Family Name -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Family Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="familyName" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">First Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="firstName" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Family Kana Name -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Family Kana Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="familyKanaName" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- First Kana Name -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">First Kana Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="firstKanaName" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Birthday -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Birthday</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" name="birthday"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Gender -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Gender</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="gender">
+                                        <option value="man">Man</option>
+                                        <option value="woman">Woman</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Office -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Office</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="office" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Tel -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Tel</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="tel"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Email -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Mail</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="mailPrefix"/>
+                                </div>
+                                <div class="col-sm-1">
+                                    <p>@</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="mailSuffix">
+                                        <option value="iinexus.com">iinexus.com</option>
+                                        <option value="gmail.com">gmail.com</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <!-- Button for Create -->
+                        <div class="col-md-12 text-center">
+                            <button type="button" id="createButton" class="btn btn-success">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        document.getElementById('createButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('userForm').action = /*[[@{/pages/user-sample-input/createUser}]]*/ '';
+            document.getElementById('userForm').submit();
+        });
+    </script>
+</section>
+</body>
+</html>
